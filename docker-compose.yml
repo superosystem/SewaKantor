@@ -1,0 +1,10 @@
+version: '2.4'
+
+services:
+  db:
+    container_name: reservation_ticket
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=spring_reservation_ticket
+    ports:
+      - 3306:3306

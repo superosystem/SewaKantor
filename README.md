@@ -20,13 +20,13 @@ password : ```userpassword```</b>
 <b>Pre-requisite</b>: you have installed [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) on your local environment.
 Clone the project
 ```bash
-$ git clone https://github.com/gusrylmubarok/spring-reservation-ticket
+$ git clone https://github.com/gusrylmubarok/spring-reserv-tiket
 ```
 
 Go to the project directory
 
 ```bash
-$ cd spring-reservation-ticket
+$ cd spring-reserv-tiket
 ```
 Build docker image
 
@@ -44,7 +44,7 @@ $ create database spring_reservation_ticket;
 
 ## Documentation
 
-- [Database, homapage, login page, ticket lists and form reservation images.](https://github.com/gusrylmubarok/spring-reservation-ticket/blob/main/documentation/)
+- [Database, homapage, login page, ticket lists and form reservation images.](https://github.com/gusrylmubarok/spring-reserv-tiket/blob/main/documentation/)
 
 ## Contributing
 
