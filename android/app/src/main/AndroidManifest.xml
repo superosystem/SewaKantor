@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gusrylmubarok.instagram.instagram">
+    package="com.orbityfiftyeight.chatto">
    <application
-        android:label="instagram"
+        android:label="chatto"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

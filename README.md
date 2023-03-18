@@ -1,4 +1,4 @@
-# instagram
+# chatto
 
 A new Flutter project.
 
