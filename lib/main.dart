@@ -6,10 +6,11 @@ import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 import 'app/widgets/error_screen.dart';
 import 'app/widgets/loading_screen.dart';
+import 'app/widgets/splash_screen.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  Firebase.initializeApp();
   runApp(ChattoApplication());
 }
 
@@ -25,10 +26,18 @@ class ChattoApplication extends StatelessWidget {
             return ErrorScreen();
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            return GetMaterialApp(
-              title: "Chatto",
-              initialRoute: AppPages.INITIAL,
-              getPages: AppPages.routes,
+            return FutureBuilder(
+              future: Future.delayed(Duration(seconds: 3)),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return GetMaterialApp(
+                    title: "Chatto",
+                    initialRoute: AppPages.INITIAL,
+                    getPages: AppPages.routes,
+                  );
+                }
+                return SplashScreen();
+              },
             );
           }
           return LoadingScreen();
