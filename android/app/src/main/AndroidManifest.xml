@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.orbityfiftyeight.chatto">
+    package="com.orbitfiftyeight.chatto">
    <application
         android:label="chatto"
         android:name="${applicationName}"

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "457653218885",
+    "project_id": "chattoapp-orbit58",
+    "storage_bucket": "chattoapp-orbit58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457653218885:android:4af4f65c4e160622d27d2c",
+        "android_client_info": {
+          "package_name": "com.orbitfiftyeight.chatto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457653218885-skl5gsg9ksqva23a8ud2aciqudihp4ug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orbitfiftyeight.chatto",
+            "certificate_hash": "e3631919fc28ae197dc6a79cc4e3a004fbb646d7"
+          }
+        },
+        {
+          "client_id": "457653218885-uvmsvkqgvm5js0p30doesttb1iaabc4o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP5_btmKXfQLtMYp7eJ6vImvN60mYd7rA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457653218885-nkms1nl016jcqc4i8k11j37puuqg3rta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
