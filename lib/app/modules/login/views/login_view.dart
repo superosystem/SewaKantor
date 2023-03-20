@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../controllers/auth_controller.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   final authController = Get.put(AuthController());
+
+  LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class LoginView extends GetView<LoginController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ElevatedButton(
-                    onPressed: () => {},
+                    onPressed: () => Get.toNamed(Routes.HOME),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

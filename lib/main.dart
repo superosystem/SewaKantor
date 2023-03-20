@@ -19,6 +19,8 @@ class ChattpApp extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final authController = AuthController();
 
+  ChattpApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

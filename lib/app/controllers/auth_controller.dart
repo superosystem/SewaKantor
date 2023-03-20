@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  var skipIntroduction = true.obs;
+  var skipIntroduction = false.obs;
   var authenticate = false.obs;
 
 }
