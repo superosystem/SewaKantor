@@ -19,7 +19,7 @@ class IntroductionView extends GetView<IntroductionController> {
             title: "Berinteraksi dengan mudah",
             body:
                 "Kamu hanya perlu di rumah saja untuk mendapatkan teman baru.",
-            image: Container(
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.width * 0.6,
               child: Center(
@@ -31,7 +31,7 @@ class IntroductionView extends GetView<IntroductionController> {
             title: "Temukan sahabat baru",
             body:
                 "Jika kamu memang jodoh karena aplikasi ini, kami sangat bahagia.",
-            image: Container(
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.width * 0.6,
               child: Center(
@@ -42,7 +42,7 @@ class IntroductionView extends GetView<IntroductionController> {
           PageViewModel(
             title: "Aplikasi bebas biaya",
             body: "Kamu tidak perlu khawatir, aplikasi ini bebas biaya apapun.",
-            image: Container(
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.width * 0.6,
               child: Center(
@@ -54,7 +54,7 @@ class IntroductionView extends GetView<IntroductionController> {
             title: "Gabung sekarang juga",
             body:
                 "Daftarkan diri kamu untuk menjadi bagian dari kami. Kami akan menghubungkan dengan 1000 teman lainnya.",
-            image: Container(
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.width * 0.6,
               child: Center(
