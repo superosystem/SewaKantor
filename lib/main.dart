@@ -5,19 +5,19 @@ import 'package:get/get.dart';
 
 import 'app/controllers/auth_controller.dart';
 import 'app/routes/app_pages.dart';
-import 'app/widgets/screen/error_screen.dart';
-import 'app/widgets/screen/loading_screen.dart';
-import 'app/widgets/screen/splash_screen.dart';
+import 'app/screen/error_screen.dart';
+import 'app/screen/loading_screen.dart';
+import 'app/screen/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
-  runApp(ChattoApplication());
+  runApp(ChattpApp());
 }
 
-class ChattoApplication extends StatelessWidget {
+class ChattpApp extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  final authController = Get.put(AuthController(), permanent: true);
+  final authController = AuthController();
 
   @override
   Widget build(BuildContext context) {

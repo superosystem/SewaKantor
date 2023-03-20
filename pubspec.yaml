@@ -1,9 +1,9 @@
 name: chatto
-version: 1.0.0
+version: 1.0.0+1
 publish_to: none
-description: Chatto is connection people
+description: chatto is connection people
 environment: 
-  sdk: '>=2.19.3 <3.0.0'
+  sdk: '>=2.19.4 <3.0.0'
 
 dependencies: 
   cupertino_icons: ^1.0.2
@@ -12,20 +12,12 @@ dependencies:
     sdk: flutter
   firebase_core: ^2.8.0
   firebase_auth: ^4.3.0
-  cloud_firestore: ^4.4.5
   firebase_storage: ^11.0.16
-  google_sign_in: ^6.0.2
   lottie: ^2.3.0
   introduction_screen: ^3.1.7
-  avatar_glow: ^2.0.2
-  emoji_picker_flutter: ^1.5.2
-  intl: ^0.17.0
-  image_picker: ^0.8.7
-  flutter_launcher_icons: ^0.12.0
-  flutter_dotenv: ^5.0.2
 
 dev_dependencies: 
-  flutter_lints: 2.0.1
+  flutter_lints: ^2.0.0
   flutter_test: 
     sdk: flutter
 

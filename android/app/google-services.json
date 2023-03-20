@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:457653218885:android:4af4f65c4e160622d27d2c",
+        "mobilesdk_app_id": "1:457653218885:android:3e0c9f11d34da53bd27d2c",
         "android_client_info": {
-          "package_name": "com.orbitfiftyeight.chatto"
+          "package_name": "org.orbitfiftyeight.chatto"
         }
       },
       "oauth_client": [
         {
-          "client_id": "457653218885-skl5gsg9ksqva23a8ud2aciqudihp4ug.apps.googleusercontent.com",
+          "client_id": "457653218885-quo2rkjvj8ohuiic0u1su1o602o82c6n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.orbitfiftyeight.chatto",
-            "certificate_hash": "e3631919fc28ae197dc6a79cc4e3a004fbb646d7"
+            "package_name": "org.orbitfiftyeight.chatto",
+            "certificate_hash": "27b8abf1ea5a4f071e9e548e9ecd6dc26477b5f9"
           }
         },
         {

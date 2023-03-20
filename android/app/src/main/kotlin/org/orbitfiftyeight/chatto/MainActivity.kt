@@ -1,4 +1,4 @@
-package com.orbitfiftyeight.chatto
+package org.orbitfiftyeight.chatto
 
 import io.flutter.embedding.android.FlutterActivity
 

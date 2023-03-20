@@ -1,6 +1,6 @@
 # chatto
 
-A new Flutter project.
+chatto is connection people
 
 ## Getting Started
 
