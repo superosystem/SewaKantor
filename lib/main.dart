@@ -32,7 +32,7 @@ class ChattpApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return GetMaterialApp(
               title: "Chatto",
-              initialRoute: Routes.PROFILE,
+              initialRoute: Routes.STATUS,
               getPages: AppPages.routes,
             );
             // return FutureBuilder(

@@ -12,6 +12,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/search_contact/bindings/search_contact_binding.dart';
 import '../modules/search_contact/views/search_contact_view.dart';
+import '../modules/status/bindings/status_binding.dart';
+import '../modules/status/views/status_view.dart';
 
 part 'app_routes.dart';
 
@@ -47,6 +49,11 @@ class AppPages {
       name: _Paths.SEARCH_CONTACT,
       page: () => SearchContactView(),
       binding: SearchContactBinding(),
+    ),
+    GetPage(
+      name: _Paths.STATUS,
+      page: () => const StatusView(),
+      binding: StatusBinding(),
     ),
   ];
 }
