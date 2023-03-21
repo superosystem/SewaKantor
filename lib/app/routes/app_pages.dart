@@ -45,7 +45,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SEARCH_CONTACT,
-      page: () => const SearchContactView(),
+      page: () => SearchContactView(),
       binding: SearchContactBinding(),
     ),
   ];
