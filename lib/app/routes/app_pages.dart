@@ -8,12 +8,14 @@ import '../modules/introduction/bindings/introduction_binding.dart';
 import '../modules/introduction/views/introduction_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-import '../modules/profile/bindings/profile_binding.dart';
-import '../modules/profile/views/profile_view.dart';
+import '../modules/profile/change_profile/bindings/change_profile_binding.dart';
+import '../modules/profile/change_profile/views/change_profile_view.dart';
+import '../modules/profile/status/bindings/status_binding.dart';
+import '../modules/profile/status/views/status_view.dart';
+import '../modules/profile/view_profile/bindings/profile_binding.dart';
+import '../modules/profile/view_profile/views/profile_view.dart';
 import '../modules/search_contact/bindings/search_contact_binding.dart';
 import '../modules/search_contact/views/search_contact_view.dart';
-import '../modules/status/bindings/status_binding.dart';
-import '../modules/status/views/status_view.dart';
 
 part 'app_routes.dart';
 
@@ -39,6 +41,13 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+      children: [
+        GetPage(
+          name: _Paths.CHANGE_PROFILE,
+          page: () => const ChangeProfileView(),
+          binding: ChangeProfileBinding(),
+        ),
+      ],
     ),
     GetPage(
       name: _Paths.CHAT_ROOM,

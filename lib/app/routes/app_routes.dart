@@ -10,6 +10,7 @@ abstract class Routes {
   static const CHAT_ROOM = _Paths.CHAT_ROOM;
   static const SEARCH_CONTACT = _Paths.SEARCH_CONTACT;
   static const STATUS = _Paths.STATUS;
+  static const CHANGE_PROFILE = _Paths.PROFILE + _Paths.CHANGE_PROFILE;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const CHAT_ROOM = '/chat-room';
   static const SEARCH_CONTACT = '/search-contact';
   static const STATUS = '/status';
+  static const CHANGE_PROFILE = '/change-profile';
 }
