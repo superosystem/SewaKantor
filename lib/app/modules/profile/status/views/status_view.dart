@@ -14,8 +14,8 @@ class StatusView extends GetView<StatusController> {
         title: const Text('Your Status'),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Get.back,
+          icon: const Icon(Icons.arrow_back),
+          onPressed: Get.back,
         ),
       ),
       body: Padding(
@@ -23,6 +23,7 @@ class StatusView extends GetView<StatusController> {
         child: Column(
           children: [
             TextField(
+              controller: controller.statusController,
               decoration: InputDecoration(
                   label: Text("Status"),
                   border: OutlineInputBorder(),

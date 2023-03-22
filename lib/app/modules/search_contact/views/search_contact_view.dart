@@ -15,7 +15,7 @@ class SearchContactView extends GetView<SearchContactController> {
     return Scaffold(
       appBar: PreferredSize(
         child: AppBar(
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.blue,
           title: Text("Select Contact"),
           centerTitle: true,
           leading: IconButton(
@@ -27,7 +27,8 @@ class SearchContactView extends GetView<SearchContactController> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: TextField(
-                cursorColor: Colors.red[900],
+                controller: controller.searchController,
+                cursorColor: Colors.blue,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,

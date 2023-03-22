@@ -21,7 +21,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
         actions: [
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: () => Get.back,
+            onPressed: Get.back,
           ),
         ],
       ),

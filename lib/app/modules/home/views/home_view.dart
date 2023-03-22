@@ -18,21 +18,21 @@ class HomeView extends GetView<HomeController> {
             elevation: 5,
             child: Container(
               margin: EdgeInsets.only(top: context.mediaQueryPadding.top),
-              padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
+              decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: Colors.black38,
+                    color: Colors.white10,
                   ),
                 ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Chatto',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -42,8 +42,8 @@ class HomeView extends GetView<HomeController> {
                     child: InkWell(
                       onTap: () => Get.toNamed(Routes.PROFILE),
                       borderRadius: BorderRadius.circular(50),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
+                      child: const Padding(
+                        padding: EdgeInsets.all(5.0),
                         child: Icon(Icons.person, color: Colors.white,),
                       ),
                     ),
@@ -63,7 +63,7 @@ class HomeView extends GetView<HomeController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed(Routes.SEARCH_CONTACT),
-        child: Icon(Icons.message),
+        child: const Icon(Icons.message),
       ),
     );
   }

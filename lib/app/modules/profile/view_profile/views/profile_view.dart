@@ -1,12 +1,15 @@
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:chatto/app/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
+  // final authController = Get.find<AuthController>();
+  ProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +68,7 @@ class ProfileView extends GetView<ProfileController> {
               child: Column(
                 children: [
                   ListTile(
-                    onTap: () => {},
+                    onTap: () => Get.toNamed(Routes.STATUS),
                     leading: Icon(Icons.note_add_outlined),
                     title: Text(
                       "Update Status",
@@ -74,7 +77,7 @@ class ProfileView extends GetView<ProfileController> {
                     trailing: Icon(Icons.arrow_right),
                   ),
                   ListTile(
-                    onTap: () => {},
+                    onTap: () => Get.toNamed(Routes.CHANGE_PROFILE),
                     leading: Icon(Icons.note_add_outlined),
                     title: Text(
                       "Change Profile",

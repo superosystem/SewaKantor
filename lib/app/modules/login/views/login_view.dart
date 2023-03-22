@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -27,34 +26,27 @@ class LoginView extends GetView<LoginController> {
                   height: Get.width * 0.7,
                   child: Lottie.asset("assets/lottie/login.json"),
                 ),
-                SizedBox(height: 50),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: ElevatedButton(
-                    onPressed: () => Get.toNamed(Routes.HOME),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset("assets/logo/google.png"),
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          "Sign In with Google",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red[900],
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Login with",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 5.0),
+                    InkWell(
+                      onTap: () => authController.loginWithGoogle(),
+                      borderRadius: BorderRadius.circular(100),
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Image.asset("assets/logo/google.png"),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -14,14 +14,14 @@ class ChatRoomView extends GetView<ChatRoomController> {
       appBar: AppBar(
         leadingWidth: 80,
         leading: InkWell(
-          onTap: () => {},
+          onTap: () => Get.back(),
           borderRadius: BorderRadius.circular(100),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 5),
-              Icon(Icons.arrow_back),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
+              const Icon(Icons.arrow_back),
+              const SizedBox(width: 5),
               CircleAvatar(
                 backgroundColor: Colors.black38,
                 child: Image.asset('assets/logo/noimage.png'),
@@ -45,10 +45,10 @@ class ChatRoomView extends GetView<ChatRoomController> {
         centerTitle: false,
       ),
       body: WillPopScope(
-        onWillPop: ()  {
+        onWillPop: () {
           if (controller.isShowEmoji.isTrue) {
             controller.isShowEmoji.value = false;
-          }else{
+          } else {
             Navigator.pop(context);
           }
           return Future.value(false);
@@ -67,17 +67,18 @@ class ChatRoomView extends GetView<ChatRoomController> {
             ),
             Container(
               margin: EdgeInsets.only(bottom: context.mediaQueryPadding.bottom),
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Container(
                       child: TextField(
+                        controller: controller.message,
                         focusNode: controller.focusNode,
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
-                            icon: Icon(Icons.emoji_emotions_outlined),
+                            icon: const Icon(Icons.emoji_emotions_outlined),
                             onPressed: () {
                               controller.focusNode.unfocus();
                               controller.isShowEmoji.toggle();
@@ -88,15 +89,15 @@ class ChatRoomView extends GetView<ChatRoomController> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Material(
                     borderRadius: BorderRadius.circular(100),
                     color: Colors.blue,
                     child: InkWell(
                         borderRadius: BorderRadius.circular(100),
                         onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
+                        child: const Padding(
+                          padding: EdgeInsets.all(15),
                           child: Icon(Icons.send, color: Colors.white),
                         )),
                   ),
@@ -114,9 +115,9 @@ class ChatRoomView extends GetView<ChatRoomController> {
                         onBackspacePressed: () {
                           controller.removeEmojiFromChat();
                         },
-                        config: Config(
+                        config: const Config(
                           columns: 7,
-                          emojiSizeMax: 28.0,
+                          emojiSizeMax: 26.0,
                           verticalSpacing: 0,
                           horizontalSpacing: 0,
                           gridPadding: EdgeInsets.zero,
@@ -133,7 +134,8 @@ class ChatRoomView extends GetView<ChatRoomController> {
                           recentsLimit: 28,
                           noRecents: const Text(
                             'No Recents',
-                            style: TextStyle(fontSize: 16, color: Colors.black26),
+                            style:
+                                TextStyle(fontSize: 16, color: Colors.black26),
                             textAlign: TextAlign.center,
                           ),
                           // Needs to be const Widget
@@ -145,7 +147,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                         ),
                       ),
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
             ),
           ],
         ),
@@ -165,9 +167,9 @@ class MessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 15,
-        vertical: 20,
+        vertical: 5,
       ),
       alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: Column(
@@ -176,14 +178,14 @@ class MessageWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.red[900],
+              color: Colors.blue[900],
               borderRadius: isSender
-                  ? BorderRadius.only(
+                  ? const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                       bottomLeft: Radius.circular(10),
                     )
-                  : BorderRadius.only(
+                  : const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                       bottomRight: Radius.circular(10),
@@ -195,7 +197,7 @@ class MessageWidget extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text("18:00 PM"),
         ],
       ),
