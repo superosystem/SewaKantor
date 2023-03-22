@@ -1,4 +1,5 @@
 import 'package:chatto/app/routes/app_pages.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -7,9 +8,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthController extends GetxController {
   var skipIntroduction = false.obs;
   var authenticate = false.obs;
+
   GoogleSignIn _googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _currentAccount;
   UserCredential? userCredential;
+  FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   Future<void> bootInitialized() async {
     await _autoLogin().then((value) {
@@ -47,6 +50,19 @@ class AuthController extends GetxController {
           box.remove('skipIntroduction');
         }
         box.write('skipIntroduction', true);
+
+        // write to firestore
+        CollectionReference user = fireStore.collection('users');
+        user.doc(_currentAccount!.email).set({
+          'uid': userCredential!.user!.uid,
+          'name': _currentAccount!.displayName,
+          'email': _currentAccount!.email,
+          'image_profile': _currentAccount!.photoUrl,
+          'status': '',
+          'creationTime': userCredential!.user!.metadata.creationTime!.toIso8601String(),
+          'lastSignInTime': userCredential!.user!.metadata.lastSignInTime!.toIso8601String(),
+          'updatedTime': DateTime.now().toIso8601String(),
+        });
 
         authenticate = true.obs;
         Get.offAllNamed(Routes.HOME);
