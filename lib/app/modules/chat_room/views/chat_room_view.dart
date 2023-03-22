@@ -56,13 +56,11 @@ class ChatRoomView extends GetView<ChatRoomController> {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                child: ListView(
-                  children: [
-                    MessageWidget(isSender: true),
-                    MessageWidget(isSender: false),
-                  ],
-                ),
+              child: ListView(
+                children: [
+                  MessageWidget(isSender: true),
+                  MessageWidget(isSender: false),
+                ],
               ),
             ),
             Container(
@@ -72,20 +70,18 @@ class ChatRoomView extends GetView<ChatRoomController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Container(
-                      child: TextField(
-                        controller: controller.message,
-                        focusNode: controller.focusNode,
-                        decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                            icon: const Icon(Icons.emoji_emotions_outlined),
-                            onPressed: () {
-                              controller.focusNode.unfocus();
-                              controller.isShowEmoji.toggle();
-                            },
-                          ),
-                          border: OutlineInputBorder(),
+                    child: TextField(
+                      controller: controller.message,
+                      focusNode: controller.focusNode,
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          icon: const Icon(Icons.emoji_emotions_outlined),
+                          onPressed: () {
+                            controller.focusNode.unfocus();
+                            controller.isShowEmoji.toggle();
+                          },
                         ),
+                        border: OutlineInputBorder(),
                       ),
                     ),
                   ),
@@ -132,17 +128,17 @@ class ChatRoomView extends GetView<ChatRoomController> {
                           enableSkinTones: true,
                           showRecentsTab: true,
                           recentsLimit: 28,
-                          noRecents: const Text(
+                          noRecents: Text(
                             'No Recents',
                             style:
                                 TextStyle(fontSize: 16, color: Colors.black26),
                             textAlign: TextAlign.center,
                           ),
                           // Needs to be const Widget
-                          loadingIndicator: const SizedBox.shrink(),
+                          loadingIndicator: SizedBox.shrink(),
                           // Needs to be const Widget
                           tabIndicatorAnimDuration: kTabScrollDuration,
-                          categoryIcons: const CategoryIcons(),
+                          categoryIcons: CategoryIcons(),
                           buttonMode: ButtonMode.MATERIAL,
                         ),
                       ),

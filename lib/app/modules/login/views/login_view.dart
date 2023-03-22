@@ -26,27 +26,32 @@ class LoginView extends GetView<LoginController> {
                   height: Get.width * 0.7,
                   child: Lottie.asset("assets/lottie/login.json"),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Login with",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                ElevatedButton(
+                  onPressed: () => authController.loginWithGoogle(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red[900],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    const SizedBox(height: 5.0),
-                    InkWell(
-                      onTap: () => authController.loginWithGoogle(),
-                      borderRadius: BorderRadius.circular(100),
-                      child: SizedBox(
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Login with",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 1.0),
+                      SizedBox(
                         width: 50,
                         height: 50,
                         child: Image.asset("assets/logo/google.png"),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -1,14 +1,14 @@
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:chatto/app/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
+import '../../../../controllers/auth_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  // final authController = Get.find<AuthController>();
+  final authController = Get.put(AuthController());
+
   ProfileView({Key? key}) : super(key: key);
 
   @override
@@ -24,43 +24,41 @@ class ProfileView extends GetView<ProfileController> {
         ),
         actions: [
           IconButton(
-            onPressed: () => {},
+            onPressed: () => authController.logout(),
             icon: Icon(Icons.logout, color: Colors.black),
           )
         ],
       ),
       body: Column(
         children: [
-          Container(
-            child: Column(
-              children: [
-                AvatarGlow(
-                  endRadius: 80,
-                  glowColor: Colors.black,
-                  duration: Duration(seconds: 2),
-                  child: Container(
-                    width: 150,
-                    height: 150,
-                    margin: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.black38,
-                      borderRadius: BorderRadius.circular(100),
-                      image: DecorationImage(
-                          image: AssetImage("assets/logo/noimage.png"),
-                          fit: BoxFit.cover),
-                    ),
+          Column(
+            children: [
+              AvatarGlow(
+                endRadius: 80,
+                glowColor: Colors.black,
+                duration: Duration(seconds: 2),
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.black38,
+                    borderRadius: BorderRadius.circular(100),
+                    image: DecorationImage(
+                        image: AssetImage("assets/logo/noimage.png"),
+                        fit: BoxFit.cover),
                   ),
                 ),
-                Text(
-                  "User Name",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "User Email",
-                  style: TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
+              ),
+              Text(
+                "User Name",
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "User Email",
+                style: TextStyle(fontSize: 14),
+              ),
+            ],
           ),
           SizedBox(height: 15),
           Expanded(
