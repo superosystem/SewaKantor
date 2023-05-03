@@ -5,8 +5,8 @@ import com.gusrylmubarok.cuacapp.data.remote.WeatherDto
 import com.gusrylmubarok.cuacapp.domain.weather.WeatherData
 import com.gusrylmubarok.cuacapp.domain.weather.WeatherInfo
 import com.gusrylmubarok.cuacapp.domain.weather.WeatherType
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 private data class IndexedWeatherData(
     val index: Int,

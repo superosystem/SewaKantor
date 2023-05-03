@@ -1,8 +1,8 @@
 package com.gusrylmubarok.cuacapp.domain.weather
 
-import java.time.LocalDateTime
+import org.threeten.bp.LocalDateTime
 
-data class WeatherData (
+data class WeatherData(
     val time: LocalDateTime,
     val temperatureCelsius: Double,
     val pressure: Double,
