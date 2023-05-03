@@ -1,4 +1,4 @@
-package com.gusrylmubarok.cuacapp.data.model
+package com.gusrylmubarok.cuacapp.domain.weather
 
 import androidx.annotation.DrawableRes
 import com.gusrylmubarok.cuacapp.R
