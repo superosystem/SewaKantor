@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { getHeading } from '../components/Navbar'
+import { getHeading } from '../components/layouts/Navbar'
 import Layout from '../pages/Layout'
 import Auth from '../utils/Auth'
 

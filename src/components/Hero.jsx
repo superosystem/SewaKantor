@@ -1,71 +1,71 @@
-import React from 'react'
-import { Box, Button, Container, Stack, Typography } from '@mui/material'
-import HeroImg from '../assets/img/app-demo.png'
-import MilitaryTechRoundedIcon from '@mui/icons-material/MilitaryTechRounded';
-import VaksinSlider from './VaksinSlider';
-import useCurrentScreen from '../hooks/useCurrentScreen';
+import React from "react";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import MilitaryTechRoundedIcon from "@mui/icons-material/MilitaryTechRounded";
+import VaksinSlider from "./VaksinSlider";
+import useCurrentScreen from "../hooks/useCurrentScreen";
+import HeroImg from "../assets/img/app-demo.png";
 
 const Hero = () => {
-  const {mobile} = useCurrentScreen();
+  const { mobile } = useCurrentScreen();
   return (
     <Container
       disableGutters
       sx={{
-        height: mobile ? 'max-content' : '80vh',
-        maxHeight: '45rem',
-        width: '100%',
-        p: 0
+        height: mobile ? "max-content" : "80vh",
+        maxHeight: "45rem",
+        width: "100%",
+        p: 0,
       }}
     >
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: mobile ? 'column-reverse' : 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: mobile ? 'max-content' : '85%',
-          background: 'linear-gradient(90deg, rgba(195, 255, 207, 0.5) 0%, #BEEAF6 48.96%, rgba(234, 241, 255, 0.7) 100%)',
-          borderRadius: '18px 18px 0px 0px',
+          display: "flex",
+          flexDirection: mobile ? "column-reverse" : "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: mobile ? "max-content" : "85%",
+          background:
+            "linear-gradient(90deg, rgba(195, 255, 207, 0.5) 0%, #BEEAF6 48.96%, rgba(234, 241, 255, 0.7) 100%)",
+          borderRadius: "18px 18px 0px 0px",
           p: 4,
         }}
       >
-        <Stack sx={{width: mobile ? '100%' : '40%'}} spacing={2} >
+        <Stack sx={{ width: mobile ? "100%" : "40%" }} spacing={2}>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
               gap: 1,
-              width: 'max-content',
-              background: 'linear-gradient(270deg, rgba(94, 255, 157, 0.5) 0%, rgba(94, 255, 157, 0) 100%)',
-              borderRadius: '0px 22px 22px 0px',
+              width: "max-content",
+              background:
+                "linear-gradient(270deg, rgba(94, 255, 157, 0.5) 0%, rgba(94, 255, 157, 0) 100%)",
+              borderRadius: "0px 22px 22px 0px",
               py: 1.5,
               px: 4,
-              transform: 'translate(-30px, 0px)'
+              transform: "translate(-30px, 0px)",
             }}
           >
-            <MilitaryTechRoundedIcon color='warning'/>
-            <Typography variant='p' fontWeight={'bold'}>Top1 Health Application</Typography>
+            <MilitaryTechRoundedIcon color="warning" />
+            <Typography variant="p" fontWeight={"bold"}>
+              Top1 Health Application
+            </Typography>
           </Box>
           <Box>
-            <Typography variant='h2'>
-              Save your life!
-            </Typography>
-            <Typography variant='h6' gutterBottom>
+            <Typography variant="h2">Save your life!</Typography>
+            <Typography variant="h6" gutterBottom>
               Get the Vaccine now and save your life and your family.
             </Typography>
           </Box>
-          <Button variant='contained' sx={{width: 'max-content',}}>DOWNLOAD APPS</Button>
+          <Button variant="contained" sx={{ width: "max-content" }}>
+            DOWNLOAD APPS
+          </Button>
         </Stack>
-        <img 
-          src={HeroImg} 
-          alt="hero-img" 
-          height={380}
-        />
+        <img src={HeroImg} alt="hero-img" height={380} />
       </Box>
       <VaksinSlider />
     </Container>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

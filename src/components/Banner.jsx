@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Container, Stack, Typography } from "@mui/material";
-import Nurse from "../assets/img/nurse.png";
-import theme from '../themes'
 import useCurrentScreen from "../hooks/useCurrentScreen";
+import theme from "../themes";
+import Nurse from "../assets/img/nurse.png";
 
 const Banner = () => {
-  const {mobile} = useCurrentScreen()
+  const { mobile } = useCurrentScreen();
   return (
     <Box
       disableGutters
@@ -15,13 +15,13 @@ const Banner = () => {
         background: theme.color.greenOpaque,
         my: 6,
         py: 4,
-        mt: mobile ? 20 : 6
+        mt: mobile ? 20 : 6,
       }}
     >
       <Container
         sx={{
           display: "flex",
-          flexDirection: mobile ? 'column' : "row",
+          flexDirection: mobile ? "column" : "row",
           justifyContent: "space-between",
           alignItems: "center",
           gap: 8,
@@ -30,16 +30,22 @@ const Banner = () => {
         <img src={Nurse} alt="nurse-img" width={420} />
         <Stack spacing={2}>
           <Typography variant="h3" gutterBottom>
-            Nikmati kemudahan book vaksin bersama Vaccine Partners
+            Easily and quickly get the vaccine with Vaccine Partners
           </Typography>
           <Typography variant="p">
-            Vaccine Partners adalah aplikasi yang dikembangkan untuk membantu program pemerintah dalam melakukan tindakan preventif penghentian penyebaran Coronavirus Disease (COVID-19).
+            Vaccine Partners is an application developed to assist government
+            programs in taking preventive actions to stop the spread of
+            Coronavirus Disease (COVID-19).
           </Typography>
           <Typography variant="p">
-            Sebagai upaya untuk memberikan pelayanan terbaik, kami telah bekerja sama dengan fasilitas kesehatan yang tersebar di seluruh Indonesia sehingga pemerataan vaksinasi dapat lebih mudah menjangkau seluruh warga negara Indonesia. 
+            In an effort to provide the best service, we have collaborated with
+            health facilities spread throughout Indonesia so that even
+            distribution of vaccinations can more easily reach all Indonesian
+            citizens.
           </Typography>
           <Typography variant="p">
-            Jangan ragu untuk segera merencanakan vaksinasi pilihan Anda hanya dalam beberapa klik lewat aplikasi VACCINE PARTNERS!
+            Don't hesitate to immediately plan your preferred vaccination in
+            just a few clicks via the Vaccine Partners App!
           </Typography>
         </Stack>
       </Container>

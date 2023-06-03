@@ -17,11 +17,11 @@ const getSessionStatus = ({StartSession, EndSession, CapacityLeft, Date, IsClose
   const end = moment(Date).set('hour', Number(EndSession.slice(0,2)))
 
   if(CapacityLeft > 0){
-    status = 'Tersedia'
+    status = 'Available'
     color = 'softInfo'
   }
   if(CapacityLeft <= 0){
-    status = 'Penuh'
+    status = 'Full'
     color = 'softSuccess'
   }
   if(moment().isAfter(end) || IsClose){
@@ -29,7 +29,7 @@ const getSessionStatus = ({StartSession, EndSession, CapacityLeft, Date, IsClose
     color = 'softNeutral'
   }
   if(moment().isBetween(start, end)){
-    status = 'Berlangsung'
+    status = 'Going On'
     color = 'softWarning'
   }
 

@@ -19,7 +19,7 @@ const Overview = () => {
     },
     {
       id: 2,
-      title: "Total Penerima Vaksin",
+      title: "Total Penerima Vaccine",
       color: "softInfo",
       data: patient,
       satuan: "orang",

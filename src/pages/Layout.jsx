@@ -3,8 +3,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import Loader from '../components/Loader'
-import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar'
+import Navbar from '../components/layouts/Navbar'
+import Sidebar from '../components/layouts/Sidebar'
 
 const Layout = () => {
   const {open} = useSelector(state => state.sidebar)

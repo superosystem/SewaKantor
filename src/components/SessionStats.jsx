@@ -26,19 +26,19 @@ const SessionStats = ({showStatus, data}) => {
     <Stack spacing={2}>
       <Stack direction={'row'} spacing={2}>
         <Box width={showStatus ? '20%' : '25%'}>
-          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Jenis Vaksin</Typography>
+          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Jenis Vaccine</Typography>
           <Typography variant='h6'>{Vaccine.Name}</Typography>
         </Box>
         <Box width={showStatus ? '20%' : '25%'}>
-          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Dosis</Typography>
+          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Doses</Typography>
           <Typography variant='h6'>{Dose}</Typography>
         </Box>
         <Box width={showStatus ? '20%' : '25%'}>
-          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Tanggal</Typography>
+          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Date</Typography>
           <Typography variant='h6'>{moment(Date).format('DD MMMM YYYY')}</Typography>
         </Box>
         <Box width={showStatus ? '20%' : '25%'}>
-          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Waktu</Typography>
+          <Typography variant='subtitle1' color={lighten('#000', 0.3)}>Time</Typography>
           <Typography variant='h6'>{`${StartSession} - ${EndSession} WIB`}</Typography>
         </Box>
         {showStatus && <Box width={'19%'}>
@@ -67,7 +67,7 @@ const SessionStats = ({showStatus, data}) => {
             p: 2
           }}
         >
-          <Typography variant='subtitle2' color={lighten('#000', 0.3)}>Kapasitas Vaksinasi</Typography>
+          <Typography variant='subtitle2' color={lighten('#000', 0.3)}>Capacity Vaksinasi</Typography>
           <Typography variant='h6'>{`${Capacity - CapacityLeft} / ${Capacity}`}</Typography>
         </Stack>
         <Stack
@@ -79,7 +79,7 @@ const SessionStats = ({showStatus, data}) => {
           }}
         >
           <Typography variant='subtitle2' color={lighten('#000', 0.3)}>
-            {showStatus ? 'Penerima Vaksin Hadir' : 'Book Vaksinasi Diterima'}
+            {showStatus ? 'Penerima Vaccine Hadir' : 'Book Vaksinasi Diterima'}
           </Typography>
           <Typography variant='h6'>
             {showStatus ? hadir.length : diterima.length}
@@ -94,7 +94,7 @@ const SessionStats = ({showStatus, data}) => {
           }}
         >
           <Typography variant='subtitle2' color={lighten('#000', 0.3)}>
-            {showStatus ? 'Penerima Vaksin Tidak Hadir' : 'Sisa Kapasitas Vaksinasi'}
+            {showStatus ? 'Penerima Vaccine Tidak Hadir' : 'Sisa Capacity Vaksinasi'}
           </Typography>
           <Typography variant='h6'>
             {showStatus ? tidakHadir.length : CapacityLeft > 0 ? CapacityLeft : 0}

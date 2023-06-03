@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import APIAuth from "../apis/auth.api";
 import Overview from "../components/Overview";
-import TablePendaftar from "../components/TablePendaftar";
-import TableVaksinTersedia from "../components/TableVaksinTersedia";
+import TablePendaftar from "../components/tables/TablePendaftar";
+import TableVaksinTersedia from "../components/tables/TableVaksinTersedia";
 
 const Dashboard = () => {
   const [rsName, setRsName] = useState('')
