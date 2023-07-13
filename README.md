@@ -1,1 +1,8 @@
-# Vaccine Partners
+# KlinikVaksin
+
+
+## How it works:
+
+- [] [Backend]()
+- [] [Frontend]()
+- [] [Mobile]()
