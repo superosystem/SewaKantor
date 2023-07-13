@@ -1,0 +1,412 @@
+package service
+
+import (
+	"errors"
+	"time"
+
+	"github.com/google/uuid"
+	"github.com/superosystem/KlinikVaksin/klinikvaksinbackend/internal/dto/payload"
+	"github.com/superosystem/KlinikVaksin/klinikvaksinbackend/internal/dto/response"
+	"github.com/superosystem/KlinikVaksin/klinikvaksinbackend/internal/model"
+	"github.com/superosystem/KlinikVaksin/klinikvaksinbackend/internal/repository"
+)
+
+type SessionsService interface {
+	CreateSessions(payloads payload.SessionPayload) (response.SessionsResponse, error)
+	GetAllSessions() ([]response.SessionsResponse, error)
+	GetAllSessionsByAdmin(idhealth string) ([]response.SessionsResponse, error)
+	GetSessionsById(id string) (response.SessionsResponse, error)
+	GetSessionActive() (response.IsCloseFalse, error)
+	GetAllFinishedSessionCount() (response.SessionFinished, error)
+	UpdateSession(payloads payload.SessionUpdate, id string) (response.SessionsUpdate, error)
+	IsCloseSession(payloads payload.SessionIsClose, id string) (response.SessionsResponse, error)
+	DeleteSession(id string) error
+}
+
+type sessionService struct {
+	SessionsRepo repository.SessionRepository
+	VaccineRepo  repository.VaccinesRepository
+	BookingRepo  repository.BookingRepository
+	UserRepo     repository.UserRepository
+	HistoryRepo  repository.HistoriesRepository
+}
+
+func NewSessionsService(
+	sessionRepo repository.SessionRepository,
+	vaccineRepo repository.VaccinesRepository,
+	bookingRepo repository.BookingRepository,
+	userRepo repository.UserRepository,
+	historyRepo repository.HistoriesRepository) *sessionService {
+	return &sessionService{
+		SessionsRepo: sessionRepo,
+		VaccineRepo:  vaccineRepo,
+		BookingRepo:  bookingRepo,
+		UserRepo:     userRepo,
+		HistoryRepo:  historyRepo,
+	}
+}
+
+func (s *sessionService) CreateSessions(payloads payload.SessionPayload) (response.SessionsResponse, error) {
+	var sessionModel model.Session
+	var sessionResponse response.SessionsResponse
+
+	defaultStatus := false
+
+	id := uuid.NewString()
+
+	dateSession, err := time.Parse("2006-01-02", payloads.Date)
+	if err != nil {
+		return sessionResponse, err
+	}
+
+	getDoseFromVaccine, err := s.VaccineRepo.GetVaccinesById(payloads.IdVaccine)
+	if err != nil {
+		return sessionResponse, err
+	}
+
+	sessionModel = model.Session{
+		ID:           id,
+		IdVaccine:    payloads.IdVaccine,
+		SessionName:  payloads.SessionName,
+		Capacity:     payloads.Capacity,
+		Dose:         getDoseFromVaccine.Dose,
+		Date:         dateSession,
+		IsClose:      defaultStatus,
+		StartSession: payloads.StartSession,
+		EndSession:   payloads.EndSession,
+	}
+
+	_, err = s.SessionsRepo.CreateSession(sessionModel)
+	if err != nil {
+		return sessionResponse, err
+	}
+
+	totalCap, err := s.SessionsRepo.GetSumOfCapacity(getDoseFromVaccine.ID)
+	if err != nil {
+		return sessionResponse, err
+	}
+
+	if totalCap.TotalCapacity > getDoseFromVaccine.Stock {
+		err := s.SessionsRepo.DeleteSession(id)
+		if err != nil {
+			return sessionResponse, err
+		}
+		return sessionResponse, errors.New("total capacity all sessions exceed of stock vaccine")
+	}
+
+	getBooking, err := s.BookingRepo.GetAllBookingBySession(sessionModel.ID)
+	if err != nil {
+		return sessionResponse, err
+	}
+	newData, err := s.SessionsRepo.GetSessionById(id)
+	if err != nil {
+		return sessionResponse, err
+	}
+
+	getbackCap := newData.Capacity - len(getBooking)
+
+	sessionResponse = response.SessionsResponse{
+		ID:           newData.ID,
+		IdVaccine:    newData.IdVaccine,
+		SessionName:  newData.SessionName,
+		Capacity:     newData.Capacity,
+		CapacityLeft: getbackCap,
+		IsClose:      newData.IsClose,
+		Dose:         newData.Dose,
+		Date:         newData.Date,
+		StartSession: newData.StartSession,
+		EndSession:   newData.EndSession,
+		CreatedAt:    newData.CreatedAt,
+		UpdatedAt:    newData.UpdatedAt,
+		Vaccine:      newData.Vaccine,
+	}
+
+	return sessionResponse, nil
+}
+
+func (s *sessionService) GetAllSessions() ([]response.SessionsResponse, error) {
+	var sessionsResponse []response.SessionsResponse
+
+	getSessions, err := s.SessionsRepo.GetAllSessions()
+
+	if err != nil {
+		return sessionsResponse, err
+	}
+
+	sessionsResponse = make([]response.SessionsResponse, len(getSessions))
+
+	for i, v := range getSessions {
+
+		getBooking, err := s.BookingRepo.GetAllBookingBySession(v.ID)
+		if err != nil {
+			return sessionsResponse, err
+		}
+
+		dataBooking := make([]response.BookingInSession, len(getBooking))
+
+		for idx, value := range getBooking {
+
+			dataBooking[idx] = response.BookingInSession{
+				ID:        value.ID,
+				IdSession: value.IdSession,
+				Queue:     value.Queue,
+				Status:    value.Status,
+				CreatedAt: value.CreatedAt,
+				UpdatedAt: value.UpdatedAt,
+			}
+		}
+
+		getSessionById, err := s.SessionsRepo.GetSessionById(v.ID)
+		if err != nil {
+			return sessionsResponse, err
+		}
+		getbackCap := getSessionById.Capacity - len(getBooking)
+
+		sessionsResponse[i] = response.SessionsResponse{
+			ID:           v.ID,
+			IdVaccine:    v.IdVaccine,
+			SessionName:  v.SessionName,
+			Capacity:     v.Capacity,
+			CapacityLeft: getbackCap,
+			Dose:         v.Dose,
+			Date:         v.Date,
+			IsClose:      v.IsClose,
+			StartSession: v.StartSession,
+			EndSession:   v.EndSession,
+			CreatedAt:    v.CreatedAt,
+			UpdatedAt:    v.UpdatedAt,
+			Vaccine:      v.Vaccine,
+			Booking:      dataBooking,
+		}
+	}
+
+	return sessionsResponse, nil
+}
+
+func (s *sessionService) GetAllSessionsByAdmin(idhealth string) ([]response.SessionsResponse, error) {
+	var sessionsResponse []response.SessionsResponse
+
+	getSessions, err := s.SessionsRepo.GetSessionsByAdmin(idhealth)
+	if err != nil {
+		return sessionsResponse, err
+	}
+
+	sessionsResponse = make([]response.SessionsResponse, len(getSessions))
+
+	for i, v := range getSessions {
+
+		getBooking, err := s.BookingRepo.GetAllBookingBySession(v.ID)
+		if err != nil {
+			return sessionsResponse, err
+		}
+
+		dataBooking := make([]response.BookingInSession, len(getBooking))
+
+		for idx, value := range getBooking {
+
+			getHistory, err := s.HistoryRepo.GetOneHistoryByIdBooking(value.ID)
+			if err != nil {
+				return sessionsResponse, err
+			}
+
+			dataBooking[idx] = response.BookingInSession{
+				ID:        value.ID,
+				IdSession: value.IdSession,
+				Queue:     value.Queue,
+				Status:    value.Status,
+				CreatedAt: value.CreatedAt,
+				UpdatedAt: value.UpdatedAt,
+				User:      &value.User,
+				History:   getHistory,
+			}
+
+		}
+
+		getSessionById, err := s.SessionsRepo.GetSessionById(v.ID)
+		if err != nil {
+			return sessionsResponse, err
+		}
+
+		getbackCap := getSessionById.Capacity - len(getBooking)
+
+		sessionsResponse[i] = response.SessionsResponse{
+			ID:           v.ID,
+			IdVaccine:    v.IdVaccine,
+			SessionName:  v.SessionName,
+			Capacity:     v.Capacity,
+			CapacityLeft: getbackCap,
+			Dose:         v.Dose,
+			Date:         v.Date,
+			IsClose:      v.IsClose,
+			StartSession: v.StartSession,
+			EndSession:   v.EndSession,
+			CreatedAt:    v.CreatedAt,
+			UpdatedAt:    v.UpdatedAt,
+			Vaccine:      v.Vaccine,
+			Booking:      dataBooking,
+		}
+	}
+
+	return sessionsResponse, nil
+}
+
+func (s *sessionService) GetSessionsById(id string) (response.SessionsResponse, error) {
+	var responseSession response.SessionsResponse
+
+	getData, err := s.SessionsRepo.GetSessionById(id)
+	if err != nil {
+		return responseSession, err
+	}
+
+	countBooking, err := s.BookingRepo.GetAllBookingBySession(id)
+	if err != nil {
+		return responseSession, err
+	}
+
+	getSessionById, err := s.SessionsRepo.GetSessionById(id)
+	if err != nil {
+		return responseSession, err
+	}
+	getbackCap := getSessionById.Capacity - len(countBooking)
+
+	dataBooking := make([]response.BookingInSession, len(countBooking))
+
+	for i, val := range countBooking {
+
+		getUser, err := s.UserRepo.GetUserDataByNikNoAddress(val.NikUser)
+		if err != nil {
+			return responseSession, err
+		}
+
+		getHistory, err := s.HistoryRepo.GetOneHistoryByIdBooking(val.ID)
+		if err != nil {
+			return responseSession, err
+		}
+
+		dataBooking[i] = response.BookingInSession{
+			ID:        val.ID,
+			IdSession: val.IdSession,
+			NikUser:   val.NikUser,
+			Queue:     val.Queue,
+			Status:    val.Status,
+			CreatedAt: val.CreatedAt,
+			UpdatedAt: val.UpdatedAt,
+			User:      &getUser,
+			History:   getHistory,
+		}
+	}
+
+	responseSession = response.SessionsResponse{
+		ID:           getData.ID,
+		IdVaccine:    getData.IdVaccine,
+		SessionName:  getData.SessionName,
+		Capacity:     getData.Capacity,
+		CapacityLeft: getbackCap,
+		Dose:         getData.Dose,
+		Date:         getData.Date,
+		IsClose:      getData.IsClose,
+		StartSession: getData.StartSession,
+		EndSession:   getData.EndSession,
+		CreatedAt:    getData.CreatedAt,
+		UpdatedAt:    getData.UpdatedAt,
+		Vaccine:      getData.Vaccine,
+		Booking:      dataBooking,
+	}
+
+	return responseSession, nil
+}
+
+func (s *sessionService) UpdateSession(payloads payload.SessionUpdate, id string) (response.SessionsUpdate, error) {
+	var respData response.SessionsUpdate
+
+	dateSession, err := time.Parse("2006-01-02", payloads.Date)
+	if err != nil {
+		return respData, err
+	}
+
+	getDoseFromVaccine, err := s.VaccineRepo.GetVaccinesById(payloads.IdVaccine)
+	if err != nil {
+		return respData, err
+	}
+
+	sessionData := model.Session{
+		SessionName:  payloads.SessionName,
+		Capacity:     payloads.Capacity,
+		Dose:         getDoseFromVaccine.Dose,
+		Date:         dateSession,
+		StartSession: payloads.StartSession,
+		EndSession:   payloads.EndSession,
+	}
+
+	if err := s.SessionsRepo.UpdateSession(sessionData, id); err != nil {
+		return respData, err
+	}
+
+	respData = response.SessionsUpdate{
+		ID:           id,
+		IdVaccine:    payloads.IdVaccine,
+		SessionName:  payloads.SessionName,
+		Capacity:     payloads.Capacity,
+		Dose:         getDoseFromVaccine.Dose,
+		Date:         dateSession,
+		StartSession: payloads.StartSession,
+		EndSession:   payloads.EndSession,
+	}
+
+	return respData, nil
+}
+
+func (s *sessionService) IsCloseSession(payloads payload.SessionIsClose, id string) (response.SessionsResponse, error) {
+	var respData response.SessionsResponse
+
+	dataUpdate := model.Session{
+		IsClose: payloads.IsClose,
+	}
+
+	err := s.SessionsRepo.UpdateSession(dataUpdate, id)
+	if err != nil {
+		return respData, err
+	}
+
+	data, err := s.GetSessionsById(id)
+	if err != nil {
+		return respData, err
+	}
+
+	return data, nil
+}
+
+func (s *sessionService) DeleteSession(id string) error {
+	if err := s.SessionsRepo.DeleteSession(id); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *sessionService) GetSessionActive() (response.IsCloseFalse, error) {
+	var sessionResponse response.IsCloseFalse
+
+	getSession, err := s.SessionsRepo.IsCloseFalse()
+
+	if err != nil {
+		return sessionResponse, err
+	}
+
+	sessionResponse = response.IsCloseFalse{Active: getSession.Active}
+
+	return sessionResponse, nil
+}
+
+func (s *sessionService) GetAllFinishedSessionCount() (response.SessionFinished, error) {
+	var sessionResponse response.SessionFinished
+
+	data, err := s.SessionsRepo.GetAllFinishedSessionCount()
+	if err != nil {
+		return sessionResponse, err
+	}
+
+	sessionResponse = data
+
+	return sessionResponse, err
+}

@@ -1,0 +1,72 @@
+### USER REGISTER
+POST http://localhost:8080/api/v1/signup
+Content-Type: application/json
+
+{
+  "fullname": "John Doe",
+  "nik": "1234567890123456",
+  "email": "johndoe@gmail.com",
+  "gender": "L",
+  "password": "passwd12345",
+  "phonenum": "0812345678",
+  "birthdate": "1999-01-02"
+}
+
+### USER LOGIN
+POST http://localhost:8080/api/v1/login
+Content-Type: application/json
+
+{
+  "email": "johndoe@gmail.com",
+  "password": "passwd12345"
+}
+
+### USER GET BY NIK
+GET http://localhost:8080/api/v1/profile
+Content-Type: application/json
+
+### USER GET HISTORY BY NIK
+GET http://localhost:8080/api/v1/profile/history
+Content-Type: application/json
+
+### USER GET ADDRESS
+GET http://localhost:8080/api/v1/profile/address
+Content-Type: application/json
+
+### USER GET DATA BY NIK
+GET http://localhost:8080/api/v1/profile/check/:nik
+Content-Type: application/json
+
+### USER UPDATE
+PUT http://localhost:8080/api/v1/profile
+Content-Type: application/json
+
+{
+  "fullname": "John Doe Update",
+  "email": "johndoe@gmail.com",
+  "gender": "L",
+  "password": "passwd12345",
+  "phonenum": "0812345678",
+  "birthdate": "1999-01-02"
+}
+
+### USER UPDATE USER ADDRESS
+PUT http://localhost:8080/api/v1/profile/address
+Content-Type: application/json
+
+{
+  "current_address": "Jl Merdeka",
+  "district": "Cwg",
+  "city": "Kuningan",
+  "province": "Jawa Barat",
+  "latitude": "1234",
+  "longitude": "1234"
+}
+
+### USER DELETE
+DELETE http://localhost:8080/api/v1/profile
+Content-Type: application/json
+
+### USER NEAR BY HEALTH
+POST http://localhost:8080/api/v1/profile
+Content-Type: application/json

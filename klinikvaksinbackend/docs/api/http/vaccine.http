@@ -1,0 +1,44 @@
+### VACCINE GET
+GET http://localhost:8080/api/v1/vaccines
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "admin12345"
+}
+
+### VACCINE GET DASHBOARD
+GET http://localhost:8080/api/v1/dashboard/vaccines
+Content-Type: application/json
+
+### VACCINE GET DASHBOARD COUNT
+GET http://localhost:8080/api/v1/dashboard/vaccines/amount
+Content-Type: application/json
+
+### VACCINE CREATE
+POST http://localhost:8080/api/v1/admin/vaccines
+Content-Type: application/json
+
+{
+  "name": "Sinovac",
+  "dose": 123,
+  "stock": 123
+}
+
+### VACCINE GET BY ADMIN
+GET http://localhost:8080/api/v1/admin/vaccines
+Content-Type: application/json
+
+### VACCINE UPDATE
+PUT http://localhost:8080/api/v1/admin/vaccines/:id
+Content-Type: application/json
+
+{
+  "name": "Sinovac",
+  "dose": 123,
+  "stock": 123
+}
+
+### VACCINE DELETE
+DELETE http://localhost:8080/api/v1/admin/vaccines/:id
+Content-Type: application/json

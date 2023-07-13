@@ -1,0 +1,121 @@
+package controller
+
+import (
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/superosystem/KlinikVaksin/klinikvaksinbackend/internal/dto/payload"
+	"github.com/superosystem/KlinikVaksin/klinikvaksinbackend/internal/service"
+)
+
+type HistoriesController struct {
+	HistoriesService service.HistoriesRepository
+}
+
+func NewHistoriesController(historyServ service.HistoriesRepository) *HistoriesController {
+	return &HistoriesController{
+		HistoriesService: historyServ,
+	}
+}
+
+func (h *HistoriesController) CreateHistory(ctx echo.Context) error {
+	var payloads payload.HistoryPayload
+
+	if err := ctx.Bind(&payloads); err != nil {
+		return ctx.JSON(http.StatusBadRequest, map[string]interface{}{
+			"error":   true,
+			"message": err.Error(),
+		})
+	}
+
+	err := h.HistoriesService.CreateHistory(payloads)
+
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"error":   true,
+			"message": err.Error(),
+		})
+	}
+
+	return ctx.JSON(http.StatusCreated, map[string]interface{}{
+		"error":    false,
+		"messages": "success create health history",
+	})
+}
+
+func (h *HistoriesController) GetAllHistory(ctx echo.Context) error {
+	allData, err := h.HistoriesService.GetAllHistory()
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"error":   true,
+			"message": err.Error(),
+		})
+	}
+
+	return ctx.JSON(http.StatusOK, map[string]interface{}{
+		"error":    false,
+		"messages": "success get all data history",
+		"data":     allData,
+	})
+}
+
+func (h *HistoriesController) GetHistoryById(ctx echo.Context) error {
+	id := ctx.Param("id")
+
+	data, err := h.HistoriesService.GetHistoryById(id)
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"error":   true,
+			"message": err.Error(),
+		})
+	}
+
+	return ctx.JSON(http.StatusOK, map[string]interface{}{
+		"error":    false,
+		"messages": "success get data history",
+		"data":     data,
+	})
+}
+
+func (h *HistoriesController) UpdateHistory(ctx echo.Context) error {
+	var payloads payload.UpdateAccHistory
+
+	id := ctx.Param("id")
+
+	if err := ctx.Bind(&payloads); err != nil {
+		return ctx.JSON(http.StatusBadRequest, map[string]interface{}{
+			"error":   true,
+			"message": err.Error(),
+		})
+	}
+
+	data, err := h.HistoriesService.UpdateHistory(id, payloads)
+	if err != nil {
+		return ctx.JSON(http.StatusBadRequest, map[string]interface{}{
+			"error":   true,
+			"message": err.Error(),
+		})
+	}
+
+	return ctx.JSON(http.StatusOK, map[string]interface{}{
+		"error":   false,
+		"message": "success update history",
+		"data":    data,
+	})
+}
+
+func (h *HistoriesController) GetTotalUserVaccinated(ctx echo.Context) error {
+	data, err := h.HistoriesService.GetTotalUserVaccinated()
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"error":   true,
+			"message": err.Error(),
+		})
+	}
+
+	return ctx.JSON(http.StatusOK, map[string]interface{}{
+		"error":    false,
+		"messages": "success get total vaccinated users",
+		"data":     data,
+	})
+}

@@ -1,0 +1,54 @@
+### BOOKING GET ALL
+GET http://localhost:8080/api/v1/bookings
+Content-Type: application/json
+
+### BOOKING GET BY ID
+GET http://localhost:8080/api/v1/bookings/:id
+Content-Type: application/json
+
+### BOOKING DASHBORD
+GET http://localhost:8080/api/v1/dashboard/bookings
+Content-Type: application/json
+
+### BOOKING DELETE
+DELETE http://localhost:8080/api/v1/bookings/:id
+Content-Type: application/json
+
+### ADMIN ACC BOOKING
+PUT http://localhost:8080/api/v1/admin/bookings/acc
+Content-Type: application/json
+
+{
+  "booking_id": 1,
+  "nik": "1234567890123456",
+  "id_session": 1,
+  "status": "OK"
+}
+
+### ADMIN ACC HISTORY BOOKING
+PUT http://localhost:8080/api/v1/admin/bookings/history/acc
+Content-Type: application/json
+
+{
+  "id_history": 1,
+  "nik": "1234567890123456",
+  "status": "OK"
+}
+
+### USER BOOKING
+POST http://localhost:8080/api/users/v1/bookings
+Content-Type: application/json
+
+{
+  "nik": "1234567890123456",
+  "id_session": 1
+}
+
+### USER CANCEL BOOKING
+PUT http://localhost:8080/api/v1/users/bookings/:nik/cancel
+Content-Type: application/json
+
+{
+  "booking_id": 1,
+  "id_session": 1
+}
