@@ -1,0 +1,19 @@
+#image-header {
+  right: 290px;
+  top: 150px;
+  z-index: -50;
+}
+
+.logo {
+  justify-content: center !important;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1110px;
+  background: var(--red);
+  transform-origin: 0%;
+}

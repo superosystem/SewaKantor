@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: sewakantor-mysql
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: ${MYSQL_NAME}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - sewakantor_mysql:/var/lib/mysql
+
+volumes:
+  sewakantor_mysql:

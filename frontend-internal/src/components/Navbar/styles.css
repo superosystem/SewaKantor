@@ -1,0 +1,13 @@
+.navbarFixedActive {
+    background-color: #0F131C;
+    color: white;
+    transition: 0.50s;
+    /* color: blue; */
+}
+
+.navbarFixed {
+    background-color: white;
+    color: #0F131C;
+    transition: 0.50s;
+    /* color: blue; */
+}

@@ -1,0 +1,39 @@
+# Compiled binary file
+*.exe
+
+# Compiled binary for macOS and Linux
+bin/
+
+# Output directory for coverage profiles
+*.out
+
+# Dependency directories (created by "go get" or "go mod tidy")
+/vendor/
+/go.sum
+
+# Environment variables file
+.env
+
+# Log files
+*.log
+
+# Binary file for the application
+/dist
+
+# Editor-specific files and directories
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# environment
+.env
+
+# IDEA
+.idea/
