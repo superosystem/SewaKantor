@@ -19,7 +19,7 @@ import 'package:sewakantor/features/offices/screen/office_filter/filter_by_selec
 import 'package:sewakantor/features/onboard/screen/on_board_view.dart';
 import 'package:sewakantor/features/transactions/screen/process_detail_order.dart';
 import 'package:sewakantor/features/transactions/widget/booking_status_widget.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/widgets/google_maps.dart';
 
 class NavigasiViewModel with ChangeNotifier {

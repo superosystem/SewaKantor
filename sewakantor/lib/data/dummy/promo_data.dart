@@ -1,4 +1,4 @@
-import 'package:sewakantor/src/model/promo_model.dart';
+import 'package:sewakantor/data/model/promo/promo_model.dart';
 
 List<PromoModel> getListOfPromo() {
   return promo;

@@ -15,7 +15,7 @@ import 'package:sewakantor/features/transactions/widget/booking_button_widget.da
 import 'package:sewakantor/features/transactions/widget/booking_status_widget.dart';
 import 'package:sewakantor/features/transactions/widget/info_onprocessed_widget.dart';
 import 'package:sewakantor/features/transactions/widget/qr_checkin_widget.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/utils/adapt_size.dart';
 import 'package:sewakantor/utils/colors.dart';
 import 'package:sewakantor/utils/remove_trailing_zero.dart';

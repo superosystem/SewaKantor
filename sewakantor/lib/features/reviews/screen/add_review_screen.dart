@@ -6,7 +6,7 @@ import 'package:sewakantor/features/navigation/view_model/navigasi_view_model.da
 import 'package:sewakantor/features/offices/widget/card_detail_office_review.dart';
 import 'package:sewakantor/features/reviews/view_model/add_review_view_model.dart';
 import 'package:sewakantor/features/reviews/view_model/review_view_model.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/utils/adapt_size.dart';
 import 'package:sewakantor/utils/colors.dart';
 import 'package:sewakantor/utils/enums.dart';

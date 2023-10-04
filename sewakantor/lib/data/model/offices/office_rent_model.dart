@@ -1,7 +1,7 @@
-import 'package:sewakantor/src/model/space_model.dart';
+import 'package:sewakantor/data/model/offices/space_model.dart';
 
-class PopularCoworkingSpaceModel extends SpaceModel {
-  PopularCoworkingSpaceModel(
+class OfficeRentModel extends SpaceModel {
+  OfficeRentModel(
       {required super.image,
       required super.name,
       required super.location,

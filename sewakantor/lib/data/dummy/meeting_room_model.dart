@@ -1,4 +1,4 @@
-import 'package:sewakantor/src/model/meeting_room_model.dart';
+import 'package:sewakantor/data/model/offices/meeting_room_model.dart';
 
 List<MeetingRoomsModel> meetingRoom = [
   MeetingRoomsModel(

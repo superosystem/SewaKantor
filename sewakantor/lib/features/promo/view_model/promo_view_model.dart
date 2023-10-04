@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sewakantor/src/model/data/promo_data.dart';
-import 'package:sewakantor/src/model/promo_model.dart';
+import 'package:sewakantor/data/dummy/promo_data.dart';
+import 'package:sewakantor/data/model/promo/promo_model.dart';
 import 'package:sewakantor/utils/adapt_size.dart';
 import 'package:sewakantor/utils/colors.dart';
 import 'package:sewakantor/widgets/dialog/response_dialog.dart';

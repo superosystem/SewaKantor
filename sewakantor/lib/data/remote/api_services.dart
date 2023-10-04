@@ -1,11 +1,12 @@
 //do api service here
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:sewakantor/data/model/users/user_models_for_regist.dart';
 import 'package:sewakantor/data/remote/constant.dart';
-import 'package:sewakantor/src/model/review_model/review_models.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/model/reviews/review_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 
 final NavigationService navService = NavigationService();
 
@@ -18,7 +19,7 @@ class UserService {
       const secureStorage = FlutterSecureStorage();
       String? accessTokens = await secureStorage.read(key: "access_tokens_bs");
       if (accessTokens != null) {
-        options.headers = {"Authorization": "Bearer " + accessTokens};
+        options.headers = {"Authorization": "Bearer $accessTokens"};
       }
       return handler.next(options); //continue
     }, onResponse: (response, handler) {
@@ -27,12 +28,16 @@ class UserService {
     }, onError: (DioError e, handler) async {
       const secureStorage = FlutterSecureStorage();
       String? accessTokens = await secureStorage.read(key: "access_tokens_bs");
-      print(accessTokens);
+      if (kDebugMode) {
+        print(accessTokens);
+      }
       if (accessTokens != null) {
         // _dio.interceptors.requestLock;
         // _dio.interceptors.responseLock;
         if (e.response?.statusCode == 401) {
-          print("start refreshing");
+          if (kDebugMode) {
+            print("start refreshing");
+          }
           await refreshTokenLoopSafety();
           // _dio.unlock();
           return handler.resolve(await _retry(e.requestOptions));
@@ -40,7 +45,9 @@ class UserService {
           return handler.next(e);
         }
       } else {
-        print("no user detected");
+        if (kDebugMode) {
+          print("no user detected");
+        }
         navService.pushNamedAndRemoveUntil("/firstPage");
       }
     }));
@@ -49,30 +56,36 @@ class UserService {
   Future<Response> logoutWithTokensServices(
       {required String accessTokens}) async {
     return _dio.post(
-      constantValue().userLogoutWithToken,
+      "${constantValue().serverUrl}logout",
       options: Options(headers: {"Authorization": "Bearer $accessTokens"}),
     );
   }
 
   Future<Response> fetchProfile({required String accessTokens}) async {
-    return await _dio.get(constantValue().userGetProfileEndpoint,
-        options: Options(headers: {"Authorization": "Bearer " + accessTokens}));
+    return await _dio.get("${constantValue().serverUrl}profile",
+        options: Options(headers: {"Authorization": "Bearer $accessTokens"}));
   }
 
   Future<void> refreshExpiredTokens() async {
     const secureStorage = FlutterSecureStorage();
     String? refreshToken = await secureStorage.read(key: "refresh_token_bs");
-    print("refreshtoken : " + refreshToken.toString());
+    if (kDebugMode) {
+      print("refreshtoken : $refreshToken");
+    }
 
     if (refreshToken != null) {
       try {
-        print("try refreshing");
+        if (kDebugMode) {
+          print("try refreshing");
+        }
         Response responses = await _dio.post(
-          constantValue().userRefreshToken,
+          "${constantValue().serverUrl}refresh",
           options:
-              Options(headers: {"Authorization": "Bearer " + refreshToken}),
+              Options(headers: {"Authorization": "Bearer $refreshToken"}),
         );
-        print("retry");
+        if (kDebugMode) {
+          print("retry");
+        }
         if (responses.statusCode == 200 || responses.statusCode == 201) {
           print("refreshed");
           await secureStorage.write(
@@ -102,7 +115,7 @@ class UserService {
 
   Future<Response> fetchAllOffice({required String accessToken}) async {
     return _dio.get(
-      constantValue().getAllOffice,
+      "${constantValue().serverUrl}offices/all",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -110,28 +123,28 @@ class UserService {
   Future<Response> fetchOfficeById(
       {required String officeId, required String accessToken}) async {
     return _dio.get(
-      constantValue().getOfficeBaseUrl + officeId,
+      "${constantValue().serverUrl}offices/$officeId",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
 
   Future<Response> fetchCoworkingSpace({required String accessToken}) async {
     return _dio.get(
-      constantValue().getCoworkingSpaceOffice,
+      "${constantValue().serverUrl}offices/type/coworking-space",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
 
   Future<Response> fetchMeetingRoom({required String accessToken}) async {
     return _dio.get(
-      constantValue().getMeetingRoomOffice,
+      "${constantValue().serverUrl}offices/type/meeting-room",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
 
   Future<Response> fetchOfficeRoom({required String accessToken}) async {
     return _dio.get(
-      constantValue().getOfficeRoom,
+      "${constantValue().serverUrl}offices/type/office",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -139,7 +152,7 @@ class UserService {
   Future<Response> fetchOfficeByRecommendation(
       {required String accessToken}) async {
     return _dio.get(
-      constantValue().getOfficeDataByRecommendation,
+      "${constantValue().serverUrl}offices/recommendation",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -147,7 +160,7 @@ class UserService {
   Future<Response> fetchOfficeByCity(
       {required String accessToken, required String cityName}) async {
     return _dio.get(
-      constantValue().getOfficeDataByCityBaseUrl + cityName,
+      "${constantValue().serverUrl}offices/city/$cityName",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -155,7 +168,7 @@ class UserService {
   Future<Response> fetchOfficeByRate(
       {required String accessToken, required String officeRate}) async {
     return _dio.get(
-      constantValue().getOfficeByRatingBaseUrl + officeRate,
+      "${constantValue().serverUrl}offices/rate/$officeRate",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -163,7 +176,7 @@ class UserService {
   Future<Response> fetchOfficeByTitle(
       {required String accessToken, required String officeTitle}) async {
     return _dio.get(
-      constantValue().getOfficeByTitleBaseUrl + officeTitle,
+      "${constantValue().serverUrl}offices/title?search=$officeTitle",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -172,7 +185,7 @@ class UserService {
       {required String accessToken,
       required String formattedLocationRequest}) async {
     return _dio.get(
-      constantValue().getNearestOfficeBaseUrl + formattedLocationRequest,
+      "${constantValue().serverUrl}offices/nearest?$formattedLocationRequest",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -192,7 +205,7 @@ class UserService {
       "office_id": formattedTransactionModels.selectedOfficeId,
     });
     print(formData.fields);
-    return _dio.post(constantValue().createTransactionRecord,
+    return _dio.post("${constantValue().serverUrl}transactions/details",
         options: Options(
             contentType: 'multipart/form-data',
             headers: {"Authorization": "Bearer " + accessToken}),
@@ -202,7 +215,7 @@ class UserService {
   Future<Response> getUserTransactionServices(
       {required String accessToken}) async {
     return _dio.get(
-      constantValue().getAllTransactionByUser,
+      "${constantValue().serverUrl}transactions",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -210,7 +223,7 @@ class UserService {
   Future<Response> getUserTransactionDetailByIdServices(
       {required String accessToken, required String requestedID}) async {
     return _dio.get(
-      constantValue().getTransactionDetails + requestedID,
+      "${constantValue().serverUrl}transaction/details/$requestedID",
       options: Options(headers: {"Authorization": "Bearer " + accessToken}),
     );
   }
@@ -219,9 +232,7 @@ class UserService {
       {required String accessToken,
       required String requestedTransactionId}) async {
     return _dio.put(
-        constantValue().cancelTransactionByIdBaseUrl +
-            requestedTransactionId +
-            "/cancel",
+        "${constantValue().serverUrl}transactions/details$requestedTransactionId/cancel",
         options: Options(headers: {"Authorization": "Bearer " + accessToken}));
   }
 
@@ -230,7 +241,7 @@ class UserService {
       required String newEmail,
       required String newGenders,
       required String accessToken}) async {
-    return _dio.put(constantValue().userChangeProfileData,
+    return _dio.put("${constantValue().serverUrl}profile",
         data: {
           "full_name": newName,
           "email": newEmail,
@@ -246,7 +257,7 @@ class UserService {
     var formData = FormData.fromMap(
         {"photo": await MultipartFile.fromFile(fileName, filename: fileName)});
     return _dio.put(
-      constantValue().userSetProfilePhoto,
+      "${constantValue().serverUrl}profile/photo",
       data: formData,
       options: Options(
           contentType: 'multipart/form-data',
@@ -256,7 +267,7 @@ class UserService {
 
   Future<Response> deleteUserAccountServices(
       {required String accessToken}) async {
-    return _dio.delete(constantValue().userDeleteAccount,
+    return _dio.delete("${constantValue().serverUrl}profile",
         options: Options(headers: {"Authorization": "Bearer " + accessToken}));
   }
 
@@ -269,7 +280,7 @@ class UserService {
       "office_id": requestedReviewModel.reviewedOfficeId,
     });
     return _dio.post(
-      constantValue().createReview,
+      "${constantValue().serverUrl}review/details",
       data: formData,
       options: Options(
           contentType: 'multipart/form-data',
@@ -278,13 +289,14 @@ class UserService {
   }
 
   Future<Response> getAllReviewByUser({required String accessToken}) async {
-    return _dio.get(constantValue().getAllReviewsByUser,
+    return _dio.get("${constantValue().serverUrl}review",
         options: Options(headers: {"Authorization": "Bearer " + accessToken}));
   }
 
   Future<Response> getAllReviewByOffice(
       {required String accessTokens, required String officeId}) {
-    return _dio.get(constantValue().getReviewsByOfficeIdBaseUrl + officeId,
+    return _dio.get(
+        "${constantValue().serverUrl}review/details/office/$officeId",
         options: Options(headers: {"Authorization": "Bearer " + accessTokens}));
   }
 
@@ -298,7 +310,7 @@ class UserService {
       "office_id": requestedReviewModel.reviewedOfficeId,
     });
     return _dio.put(
-      constantValue().editReviewsBaseUrl + "$requestedReviewId",
+      "${constantValue().serverUrl}review/details/$requestedReviewId",
       data: formData,
       options: Options(
           contentType: 'multipart/form-data',
@@ -313,7 +325,7 @@ class SignService {
   Future<Response> loginUser(
       {required String userEmail, required String userPassword, tempo}) async {
     return dioClient.post(
-      constantValue().userLoginEndpoint,
+      "${constantValue().serverUrl}login",
       data: {
         "email": userEmail,
         "password": userPassword,
@@ -323,7 +335,7 @@ class SignService {
 
   Future<Response> registerUser({required UserModelForRegist userInfo}) async {
     return dioClient.post(
-      constantValue().userRegisterEndpoint,
+      "${constantValue().serverUrl}register",
       data: {
         "full_name": userInfo.full_name,
         "gender": userInfo.gender,
@@ -341,7 +353,7 @@ Future<void> refreshTokenLoopSafety() async {
   if (refreshToken != null) {
     try {
       Response responses = await Dio().post(
-        constantValue().userRefreshToken,
+        "${constantValue().serverUrl}refresh",
         options: Options(headers: {"Authorization": "Bearer " + refreshToken}),
       );
       print(responses);

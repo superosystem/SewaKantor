@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sewakantor/core/network/network_aware.dart';
 import 'package:sewakantor/core/network/no_connection_screen.dart';
 import 'package:sewakantor/features/navigation/view_model/navigasi_view_model.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/utils/adapt_size.dart';
 import 'package:sewakantor/utils/colors.dart';
 import 'package:sewakantor/widgets/button_widget.dart';

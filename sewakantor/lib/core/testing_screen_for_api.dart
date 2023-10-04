@@ -1,5 +1,5 @@
-import 'package:sewakantor/src/model/data/sample_data.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/dummy/sample_data.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/data/remote/api_services.dart';
 import 'package:sewakantor/core/parsers.dart';
 import 'package:sewakantor/utils/enums.dart';

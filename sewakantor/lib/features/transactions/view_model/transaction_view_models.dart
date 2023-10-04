@@ -5,7 +5,7 @@ import 'package:sewakantor/core/parsers.dart';
 import 'package:sewakantor/data/model/offices/office_dummy_models.dart';
 import 'package:sewakantor/data/model/users/user_models.dart';
 import 'package:sewakantor/data/remote/api_services.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/utils/enums.dart';
 
 class TransactionViewModels with ChangeNotifier {

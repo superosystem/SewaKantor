@@ -17,7 +17,7 @@ import 'package:sewakantor/features/offices/widget/office_type_card.dart';
 import 'package:sewakantor/features/promo/view_model/promo_view_model.dart';
 import 'package:sewakantor/features/transactions/view_model/transaction_view_model.dart';
 import 'package:sewakantor/features/transactions/view_model/transaction_view_models.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/utils/adapt_size.dart';
 import 'package:sewakantor/utils/colors.dart';
 import 'package:sewakantor/utils/custom_icons.dart';

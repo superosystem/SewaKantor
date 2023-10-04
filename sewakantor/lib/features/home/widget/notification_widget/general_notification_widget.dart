@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sewakantor/src/model/data/general_notification_data.dart';
-import 'package:sewakantor/src/model/notification_model.dart';
+import 'package:sewakantor/data/dummy/general_notification_data.dart';
+import 'package:sewakantor/data/model/notifications/notification_model.dart';
 import 'package:sewakantor/utils/adapt_size.dart';
 import 'package:sewakantor/utils/colors.dart';
 import 'package:sewakantor/widgets/rich_text_widget.dart';

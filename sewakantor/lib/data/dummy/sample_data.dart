@@ -1,4 +1,4 @@
-import 'package:sewakantor/src/model/data/sample_model_data.dart';
+import 'package:sewakantor/data/dummy/sample_model_data.dart';
 
 List<SampleSearchModel> spaceSearch = [
   SampleSearchModel(

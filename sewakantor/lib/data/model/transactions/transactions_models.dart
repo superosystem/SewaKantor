@@ -1,5 +1,5 @@
 import 'package:sewakantor/data/model/offices/office_dummy_models.dart';
-import 'package:sewakantor/src/model/promo_model.dart';
+import 'package:sewakantor/data/model/promo/promo_model.dart';
 import 'package:sewakantor/data/model/users/user_models.dart';
 import 'package:intl/intl.dart';
 

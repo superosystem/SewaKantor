@@ -3,10 +3,10 @@ import 'package:faker/faker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sewakantor/data/model/offices/office_dummy_models.dart';
 import 'package:sewakantor/data/model/users/user_models.dart';
-import 'package:sewakantor/src/model/data/promo_data.dart';
-import 'package:sewakantor/src/model/promo_model.dart';
-import 'package:sewakantor/src/model/review_model/review_models.dart';
-import 'package:sewakantor/src/model/transaction_model/transaction_models.dart';
+import 'package:sewakantor/data/dummy/promo_data.dart';
+import 'package:sewakantor/data/model/promo/promo_model.dart';
+import 'package:sewakantor/data/model/reviews/review_models.dart';
+import 'package:sewakantor/data/model/transactions/transactions_models.dart';
 import 'package:sewakantor/utils/enums.dart';
 
 //helper & formatter parsers

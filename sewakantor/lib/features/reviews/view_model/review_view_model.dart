@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sewakantor/core/parsers.dart';
 import 'package:sewakantor/data/remote/api_services.dart';
-import 'package:sewakantor/src/model/review_model/review_models.dart';
+import 'package:sewakantor/data/model/reviews/review_models.dart';
 import 'package:sewakantor/utils/enums.dart';
 
 class ReviewViewModels with ChangeNotifier {

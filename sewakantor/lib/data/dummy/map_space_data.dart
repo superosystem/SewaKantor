@@ -1,4 +1,4 @@
-import 'package:sewakantor/src/model/map_space_model.dart';
+import 'package:sewakantor/data/model/locations/map_space_model.dart';
 
 List<MapSpaceModel> mapSpace = [
   MapSpaceModel(

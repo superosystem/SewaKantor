@@ -1,4 +1,4 @@
-import 'package:sewakantor/src/model/popular_coworking_model.dart';
+import 'package:sewakantor/data/model/offices/popular_coworking_model.dart';
 
 List<PopularCoworkingSpaceModel> popularCoworkingSpace = [
   PopularCoworkingSpaceModel(

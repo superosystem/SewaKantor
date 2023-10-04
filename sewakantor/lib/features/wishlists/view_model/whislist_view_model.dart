@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sewakantor/src/model/user_whislist/user_whislist.dart';
+import 'package:sewakantor/data/model/wishlist/user_whislist.dart';
 
 class WhislistViewModel with ChangeNotifier {
   final List<UserWhislistModel> _whislist = [];

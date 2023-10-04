@@ -17,7 +17,7 @@ import 'package:sewakantor/features/offices/view_model/office_view_models.dart';
 import 'package:sewakantor/features/offices/widget/card_review_widget.dart';
 import 'package:sewakantor/features/reviews/view_model/review_view_model.dart';
 import 'package:sewakantor/features/wishlists/view_model/whislist_view_model.dart';
-import 'package:sewakantor/src/model/user_whislist/user_whislist.dart';
+import 'package:sewakantor/data/model/wishlist/user_whislist.dart';
 import 'package:sewakantor/utils/adapt_size.dart';
 import 'package:sewakantor/utils/colors.dart';
 import 'package:sewakantor/utils/enums.dart';

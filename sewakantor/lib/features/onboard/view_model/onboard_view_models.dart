@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sewakantor/data/model/onboard/onboarding_model.dart';
-import 'package:sewakantor/src/model/data/onboarding_data.dart';
+import 'package:sewakantor/data/dummy/onboarding_data.dart';
 
 class OnboardViewModels with ChangeNotifier {
   final List<OnboardingModel> _onboardList = onboarding;

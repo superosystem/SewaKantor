@@ -1,4 +1,4 @@
-import 'package:sewakantor/src/model/notification_model.dart';
+import 'package:sewakantor/data/model/notifications/notification_model.dart';
 
 List<NotificationModel> notificationRecomen = [
   NotificationModel(
